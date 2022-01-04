@@ -1,0 +1,75 @@
+:root {
+  --plyr-color-main: #ff0000;
+}
+.loader {
+  border-top-color: #3498db;
+  -webkit-animation: spinner 1.5s linear infinite;
+  animation: spinner 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.channel-card-width {
+  width: 192px;
+  max-width: 192px;
+}
+
+.bg-vod-badge {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.player {
+  max-height: 85vh !important;
+}
+.plyr {
+}
+.plyr video {
+  max-height: 80vh !important;
+  width: 100%;
+}
+.plyr--fullscreen-active video {
+  max-height: 100vh !important;
+}
+.plyr:-webkit-full-screen video {
+  max-height: 100vh !important;
+}
+.plyr:fullscreen video {
+  max-height: 100vh !important;
+}
+.plyr:-webkit-full-screen video {
+  max-height: 100vh !important;
+}
+
+.description-text {
+  white-space: break-spaces;
+}
+
+.a .description-link {
+  color: #3da2f9;
+}
+.a .span {
+  color: #fafafa;
+}
+.a .a {
+  color: #fafafa;
+}
+.a .description-timestamp {
+  color: #0284c7;
+  cursor: pointer;
+}
