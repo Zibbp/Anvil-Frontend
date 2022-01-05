@@ -38,7 +38,8 @@ const VideoTitle = ({ data }) => {
                             </a>
                         </span>
                     </Link>{" "}
-                    • {data.video.view_count.toLocaleString()} views
+                    • {dayjs(data.video.upload_date).format("MM/DD/YYYY")} •{" "}
+                    {data.video.view_count.toLocaleString()} views
                     <span
                         onClick={toggle}
                         className={`pl-1 inline-flex ${
@@ -62,9 +63,10 @@ const VideoTitle = ({ data }) => {
                     </span>
                     <span className={showInfo ? "visible" : "invisible"}>
                         {" "}
-                        • {dayjs(data.video.upload_date).format("MM/DD/YYYY")} •
-                        Archived on{" "}
-                        {dayjs(data.video.created_at).format("MM/DD/YYYY")} |{" "}
+                        • Archived on{" "}
+                        {dayjs(data.video.created_at).format(
+                            "MM/DD/YYYY"
+                        )} |{" "}
                         <span>
                             {data.video.resolution} • {data.video.fps} FPS •{" "}
                             <span title="Video Codec">{data.video.vcodec}</span>{" "}

@@ -4,80 +4,83 @@ import "plyr/dist/plyr.css";
 import eventBus from "../../utils/EventBus";
 
 const VideoPlayer = (props) => {
-  const options = {
-    controls: [
-      "rewind",
-      "play",
-      "fast-forward",
-      "progress",
-      "current-time",
-      "duration",
-      "mute",
-      "volume",
-      "settings",
-      "fullscreen",
-    ],
-    captions: false,
-  };
-  const subtitles = [];
-  // If subtitles are available, add them to the player
-  if (props.data.video.generated_subtitles_path) {
-    const escapedSubtitlePath =
-      props.data.video.generated_subtitles_path.replace(/#/g, "%23");
-    const subtitleObject = {
-      kind: "captions",
-      label: `${props.data.video.generated_subtitles_path.slice(
-        -6,
-        -4
-      )}-auto-generated`,
-      srclang: `${props.data.video.generated_subtitles_path.slice(-6, -4)}`,
-      src: `${process.env.NEXT_PUBLIC_NGINX_URL}${escapedSubtitlePath}`,
+    const options = {
+        controls: [
+            "rewind",
+            "play",
+            "fast-forward",
+            "progress",
+            "current-time",
+            "duration",
+            "mute",
+            "volume",
+            "settings",
+            "fullscreen",
+        ],
+        captions: false,
     };
-    subtitles.push(subtitleObject);
-  }
-  if (props.data.video.subtitles_path) {
-    const escapedSubtitlePath = props.data.video.subtitles_path.replace(
-      /#/g,
-      "%23"
+    const subtitles = [];
+    // If subtitles are available, add them to the player
+    if (props.data.video.generated_subtitles_path) {
+        const escapedSubtitlePath =
+            props.data.video.generated_subtitles_path.replace(/#/g, "%23");
+        const subtitleObject = {
+            kind: "captions",
+            label: `${props.data.video.generated_subtitles_path.slice(
+                -6,
+                -4
+            )}-auto-generated`,
+            srclang: `${props.data.video.generated_subtitles_path.slice(
+                -6,
+                -4
+            )}`,
+            src: `${process.env.NEXT_PUBLIC_NGINX_URL}${escapedSubtitlePath}`,
+        };
+        subtitles.push(subtitleObject);
+    }
+    if (props.data.video.subtitles_path) {
+        const escapedSubtitlePath = props.data.video.subtitles_path.replace(
+            /#/g,
+            "%23"
+        );
+        const subtitleObject = {
+            kind: "captions",
+            label: `${props.data.video.subtitles_path.slice(-9, -7)}`,
+            srclang: `${props.data.video.subtitles_path.slice(-9, -7)}`,
+            src: `${process.env.NEXT_PUBLIC_NGINX_URL}${escapedSubtitlePath}`,
+        };
+        subtitles.push(subtitleObject);
+    }
+
+    const sources = {
+        type: "video",
+        sources: [
+            {
+                src: props.data.httpVideoUrl,
+                type: "video/webm",
+                size: 1080,
+            },
+        ],
+        poster: props.data.httpThumbnailUrl,
+        tracks: subtitles,
+    };
+    useEffect(() => {
+        const player = new Plyr(".js-plyr", options);
+        player.source = sources;
+        return function cleanup() {
+            player.destroy();
+        };
+    });
+
+    eventBus.on("toTimestamp", (timestamp) => {
+        console.log(timestamp);
+    });
+
+    return (
+        <div>
+            <video crossOrigin="true" className={`js-plyr plyr`} />
+        </div>
     );
-    const subtitleObject = {
-      kind: "captions",
-      label: `${props.data.video.subtitles_path.slice(-9, -7)}`,
-      srclang: `${props.data.video.subtitles_path.slice(-9, -7)}`,
-      src: `${process.env.NEXT_PUBLIC_NGINX_URL}${escapedSubtitlePath}`,
-    };
-    subtitles.push(subtitleObject);
-  }
-
-  const sources = {
-    type: "video",
-    sources: [
-      {
-        src: props.data.httpVideoUrl,
-        type: "video/webm",
-        size: 1080,
-      },
-    ],
-    poster: props.data.httpThumbnailUrl,
-    tracks: subtitles,
-  };
-  useEffect(() => {
-    const player = new Plyr(".js-plyr", options);
-    player.source = sources;
-    return function cleanup() {
-      player.destroy();
-    };
-  });
-
-  eventBus.on("toTimestamp", (timestamp) => {
-    console.log(timestamp);
-  });
-
-  return (
-    <div>
-      <video crossOrigin="true" className={`js-plyr plyr`} />
-    </div>
-  );
 };
 
 export default VideoPlayer;
