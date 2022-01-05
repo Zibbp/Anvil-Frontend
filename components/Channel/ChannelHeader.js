@@ -1,6 +1,8 @@
 import Image from "next/image";
+import getConfig from "next/config";
 
 const ChannelHeader = ({ channel }) => {
+    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
     if (!channel) return null;
 
     var channelName = channel.name.replace(/ /g, "_");
@@ -13,7 +15,7 @@ const ChannelHeader = ({ channel }) => {
                         <div className="w-24 h-24 rounded-full relative">
                             <Image
                                 className={"rounded-full"}
-                                src={`${process.env.NEXT_PUBLIC_NGINX_URL}/videos/${channelName}/${channelName}.jpg`}
+                                src={`${publicRuntimeConfig.NGINX_URL}/videos/${channelName}/${channelName}.jpg`}
                                 alt={`${channel.name} channel logo`}
                                 layout={"fill"}
                                 objectFit={"contain"}

@@ -4,6 +4,7 @@ import Error from "next/error";
 import VideoPlayer from "../../components/Video/VideoPlayer";
 import VideoTitle from "../../components/Video/VideoTitle";
 import VideoDescription from "../../components/Video/VideoDescription";
+import getConfig from "next/config";
 
 const fetcher = async (url) => {
     const res = await fetch(url);
@@ -22,11 +23,12 @@ const fetcher = async (url) => {
 };
 
 const ChannelPage = () => {
+    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
     const router = useRouter();
     const { id } = router.query;
 
     const { data, error } = useSWRImmutable(
-        `${process.env.NEXT_PUBLIC_API_URL}/video/${id}`,
+        `${publicRuntimeConfig.API_URL}/video/${id}`,
         fetcher
     );
 
@@ -39,8 +41,10 @@ const ChannelPage = () => {
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-10 2xl:col-span-10 xl:col-span-10 lg:col-span-10 md:col-span-12 sm:col-span-12">
                     <VideoPlayer data={data} />
-                    <VideoTitle data={data} />
-                    <VideoDescription data={data} />
+                    <div class="container mx-auto">
+                        <VideoTitle data={data} />
+                        <VideoDescription data={data} />
+                    </div>
                 </div>
                 <div className="col-span-2 2xl:col-span-2 xl:col-span-2 lg:col-span-2 md:col-span-12 sm:col-span-12 h-screen">
                     recommended videos go here

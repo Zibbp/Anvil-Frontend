@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import Plyr from "plyr";
 import "plyr/dist/plyr.css";
 import eventBus from "../../utils/EventBus";
+import getConfig from "next/config";
 
 const VideoPlayer = (props) => {
+    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
     const options = {
         controls: [
             "rewind",
@@ -34,7 +36,7 @@ const VideoPlayer = (props) => {
                 -6,
                 -4
             )}`,
-            src: `${process.env.NEXT_PUBLIC_NGINX_URL}${escapedSubtitlePath}`,
+            src: `${publicRuntimeConfig.NGINX_URL}${escapedSubtitlePath}`,
         };
         subtitles.push(subtitleObject);
     }
@@ -47,7 +49,7 @@ const VideoPlayer = (props) => {
             kind: "captions",
             label: `${props.data.video.subtitles_path.slice(-9, -7)}`,
             srclang: `${props.data.video.subtitles_path.slice(-9, -7)}`,
-            src: `${process.env.NEXT_PUBLIC_NGINX_URL}${escapedSubtitlePath}`,
+            src: `${publicRuntimeConfig.NGINX_URL}${escapedSubtitlePath}`,
         };
         subtitles.push(subtitleObject);
     }

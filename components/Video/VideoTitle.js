@@ -1,8 +1,10 @@
 import dayjs from "dayjs";
 import { useState } from "react";
 import Link from "next/link";
+import getConfig from "next/config";
 
 const VideoTitle = ({ data }) => {
+    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
     const [showInfo, setShowInfo] = useState(false);
     function toggle() {
         setShowInfo(!showInfo);
@@ -30,7 +32,7 @@ const VideoTitle = ({ data }) => {
                         <span>
                             <img
                                 className="inline object-cover w-8 h-8 rounded-full"
-                                src={`${process.env.NEXT_PUBLIC_NGINX_URL}/videos/${channelName}/${channelName}.jpg`}
+                                src={`${publicRuntimeConfig.NGINX_URL}/videos/${channelName}/${channelName}.jpg`}
                                 alt={`${data.video.uploader} Profile picture.`}
                             />{" "}
                             <a href={`/channels/${data.video.uploader}`}>

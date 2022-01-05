@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import getConfig from "next/config";
 
 const ChannelCard = (props) => {
+    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
     var channelName = props.channel.name.replace(/ /g, "_");
     return (
         <Link href={`/channels/${props.channel.name}`} passHref>
@@ -11,7 +13,7 @@ const ChannelCard = (props) => {
             >
                 <a href={`/channels/${props.channel.name}`}>
                     <Image
-                        src={`${process.env.NEXT_PUBLIC_NGINX_URL}/videos/${channelName}/${channelName}.jpg`}
+                        src={`${publicRuntimeConfig.NGINX_URL}/videos/${channelName}/${channelName}.jpg`}
                         alt={`${props.channel.name} channel logo`}
                         height={208}
                         width={208}

@@ -1,11 +1,13 @@
 import useSWR from "swr";
 import ChannelCard from "../../components/Channel/ChannelCard";
+import getConfig from "next/config";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 const Channels = () => {
+    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
     const { data, error } = useSWR(
-        `${process.env.NEXT_PUBLIC_API_URL}/channels`,
+        `${publicRuntimeConfig.API_URL}/channels`,
         fetcher
     );
 
