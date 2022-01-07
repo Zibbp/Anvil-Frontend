@@ -1,33 +1,44 @@
 import eventBus from "../../utils/EventBus";
+import * as processString from "react-process-string";
 
 const VideoDescription = ({ data }) => {
-    const formatLinks = `<a className="description-body dark:text-light-900">${data.video.description.replace(
-        /([^\S]|^)(((https?\:\/\/)|(www\.))(\S+))/gi,
-        function (match, space, url) {
-            var hyperlink = url;
-            if (!hyperlink.match("^https?://")) {
-                hyperlink = "http://" + hyperlink;
-            }
-            return (
-                space +
-                '<a className="description-link" target="_blank" href="' +
-                hyperlink +
-                '">' +
-                url +
-                "</a>"
-            );
-        }
-    )}</a>`;
-    const formattedDescription = formatLinks.replace(
-        /(?:(?:([01]?\d):)?([0-5]?\d))?:([0-5]?\d)/gi,
-        function (match) {
-            return "<a>" + match + "</a>";
-        }
-    );
+    let config = [
+        {
+            regex: /([^\S]|^)(((https?\:\/\/)|(www\.))(\S+))/gi,
+            fn: (key, result) => (
+                <span key={key}>
+                    <a
+                        class="description-link"
+                        target="_blank"
+                        href={result[0]}
+                    >
+                        {result[0]}
+                    </a>
+                </span>
+            ),
+        },
+        {
+            regex: /(?:(?:([01]?\d):)?([0-5]?\d))?:([0-5]?\d)/gi,
+            fn: (key, result) => (
+                <span key={key}>
+                    <a
+                        class="description-timestamp"
+                        onClick={() => toTimestamp(result[0])}
+                        href="#"
+                    >
+                        {result[0]}
+                    </a>
+                </span>
+            ),
+        },
+    ];
 
+    let processed = processString(config)(data.video.description);
+
+    console.log(data.video.description);
     function toTimestamp(time) {
-        console.log("clicked to timestamp with time: ", time);
-        eventBus.dispatch;
+        console.log(hmsToSecondsOnly(time));
+        eventBus.dispatch("seekToTimestamp", hmsToSecondsOnly(time));
     }
 
     function hmsToSecondsOnly(str) {
@@ -46,22 +57,8 @@ const VideoDescription = ({ data }) => {
     }
 
     return (
-        <div className="container pt-2 mx-auto">
-            <div
-                className="
-        text-md text-gray-900
-        dark:text-light-900
-        text-left
-        description-text
-        max-w-5xl
-      "
-            >
-                <div
-                    // @click="clickTimestamp"
-                    className="a dark:text-gray-100"
-                    dangerouslySetInnerHTML={{ __html: formattedDescription }}
-                ></div>
-            </div>
+        <div className="max-w-screen-xl	" style={{ whiteSpace: "pre-wrap" }}>
+            {processed}
         </div>
     );
 };

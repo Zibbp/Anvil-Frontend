@@ -69,13 +69,12 @@ const VideoPlayer = (props) => {
     useEffect(() => {
         const player = new Plyr(".js-plyr", options);
         player.source = sources;
+        eventBus.on("seekToTimestamp", (timestamp) => {
+            player.currentTime = timestamp;
+        });
         return function cleanup() {
             player.destroy();
         };
-    });
-
-    eventBus.on("toTimestamp", (timestamp) => {
-        console.log(timestamp);
     });
 
     return (

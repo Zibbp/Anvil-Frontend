@@ -41,7 +41,7 @@ const ChannelPage = () => {
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-10 2xl:col-span-10 xl:col-span-10 lg:col-span-10 md:col-span-12 sm:col-span-12">
                     <VideoPlayer data={data} />
-                    <div class="container mx-auto">
+                    <div class="container mx-auto px-12 min-w-full w-full">
                         <VideoTitle data={data} />
                         <VideoDescription data={data} />
                     </div>

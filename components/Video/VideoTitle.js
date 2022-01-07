@@ -13,13 +13,13 @@ const VideoTitle = ({ data }) => {
     var channelName = data.video.uploader.replace(/ /g, "_");
 
     return (
-        <div>
-            <div className="container pt-5 mx-auto">
+        <div className=" mx-auto min-w-full pt-4">
+            <div className="">
                 <a className="title-font font-medium text-gray-900 dark:text-white">
                     <span className="text-xl">{data.video.title}</span>
                 </a>
             </div>
-            <div className="container pb-4 mx-auto flex items-center sm:flex-row flex-col">
+            <div className="pb-4 flex items-center sm:flex-row flex-col">
                 <p
                     className="
               text-sm text-gray-600

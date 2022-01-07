@@ -5,6 +5,7 @@ import getConfig from "next/config";
 const ChannelCard = (props) => {
     const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
     var channelName = props.channel.name.replace(/ /g, "_");
+    var imageLoaded = false;
     return (
         <Link href={`/channels/${props.channel.name}`} passHref>
             <div
@@ -15,8 +16,11 @@ const ChannelCard = (props) => {
                     <Image
                         src={`${publicRuntimeConfig.NGINX_URL}/videos/${channelName}/${channelName}.jpg`}
                         alt={`${props.channel.name} channel logo`}
+                        className={`rounded-lg`}
                         height={208}
                         width={208}
+                        placeholder={"blur"}
+                        blurDataURL={`data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`}
                     />
                 </a>
                 <div className="pb-2">
