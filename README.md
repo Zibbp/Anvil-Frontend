@@ -1,29 +1,39 @@
-# Next.js + Tailwind CSS Example
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a>
+    <img src=".github/anvil.png" alt="Logo" width="80" height="80">
+  </a>
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+  <h2 align="center">Anvil</h2>
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+  <p align="center">
+    Watch Your Archived YouTube Collection
+  </p>
+</div>
 
-## Preview
+# About
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+Anvil is a frontend / backend solution for viewing your archived YouTube collection.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+# WORK IN PROGRESS
 
-## Deploy your own
+**Working Features**
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+-   Browsing channels
+-   Browsing videos
+-   Video playback (including video information such as title, date, description, working links and timestamps)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+**Features In Progress**
 
-## How to use
+-   Comments
+-   Recommended Videos
+-   Search
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+### Demo Development Screenshots
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+![Demo One](.github/demo_ss_one.png)
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+![Demo Two](.github/demo_ss_two.png)
+
+![Demo Three](.github/demo_ss_three.png)
