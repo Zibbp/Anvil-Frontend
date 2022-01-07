@@ -57,7 +57,10 @@ const VideoDescription = ({ data }) => {
     }
 
     return (
-        <div className="max-w-screen-xl	" style={{ whiteSpace: "pre-wrap" }}>
+        <div
+            className="max-w-screen-xl	dark:text-gray-100"
+            style={{ whiteSpace: "pre-wrap" }}
+        >
             {processed}
         </div>
     );
