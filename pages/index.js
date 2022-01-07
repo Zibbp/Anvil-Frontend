@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 export default function Home() {
     return (
         <div>
-            <h1 className="text-red-500">Work in progress...</h1>
+            <h1>Anvil - View your archived YouTube collection.</h1>
         </div>
     );
 }
